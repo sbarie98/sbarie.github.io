@@ -20,6 +20,7 @@ class Play extends Phaser.Scene {
     }
     
     create() {
+
         // place tile sprite
         this.sky = this.add.tileSprite(0, 0, 640, 480, 'sky').setOrigin(0,0);
 
@@ -195,9 +196,21 @@ class Play extends Phaser.Scene {
 
             this.gameOver = true;
         }, null, this);
+
+        // make timer display
+        this.add.rectangle(268, 84, 105, 36, 0x593f14).setOrigin(0, 0);
+        this.add.rectangle(272, 88, 96, 28, 0xcf9846).setOrigin(0, 0);
+        this.clockCenter = ((game.settings.gameTimer)/1000);
+        this.clockText = this.add.text(272, 88, this.clockCenter, scoreConfig);
     }
 
     update(){
+        // update timer display
+        //update my timer
+        this.clockCurrent = this.clock.elapsed/1000;
+        this.clockCenter = ((game.settings.gameTimer)/1000) - Math.trunc(this.clockCurrent);
+        this.clockText.setText('Timer: ' + this.clockCenter);
+
         // check key input for restart
         if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyR)){
             this.scene.restart(this.p1Score);
@@ -207,9 +220,6 @@ class Play extends Phaser.Scene {
             this.scene.restart(this.p1Dart);
             this.scene.restart(this.p2Dart);
 
-        }
-        if (this.gameOver && Phaser.Input.Keyboard.JustDown(keyLEFT)) {
-            this.scene.start("menuScene");
         }
 
         this.sky.tilePositionX -= 1;

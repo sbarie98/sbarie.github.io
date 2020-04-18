@@ -8,8 +8,8 @@ class Menu extends Phaser.Scene {
     this.load.audio('sfx_select', './assets/selectBeep.wav');
     this.load.audio('sfx_pop', './assets/popBalloon.wav');
     this.load.audio('sfx_dart', './assets/dartWoosh.wav');
-    this.load.audio('background', './assets/circus-melody.wav');
     this.load.audio('sfx_cheer', './assets/cheer.wav');
+    this.load.audio('bgm', './assets/circusLoop.wav');
 
     // load tile Sprite
     this.load.image('sky', './assets/sky.png');
@@ -19,6 +19,12 @@ class Menu extends Phaser.Scene {
   }
   
   create() {
+
+    // create sound loop
+    var music = this.sound.add('bgm');
+    music.setLoop(true);
+    music.play();
+
     // place tile sprite
     this.sky = this.add.tileSprite(0, 0, 640, 480, 'sky').setOrigin(0,0);
 
@@ -103,9 +109,9 @@ class Menu extends Phaser.Scene {
     let centerY = game.config.width/2;
     let textSpacer = 64;
 
-    this.add.rectangle(centerX, centerY - textSpacer*3, 158, 40, 0x000000).setOrigin(0.5);
-    this.add.rectangle(centerX, centerY - textSpacer*2, 580, 40, 0x000000).setOrigin(0.5);
-    this.add.rectangle(centerX, centerY - textSpacer, 574, 40, 0x000000).setOrigin(0.5);
+    this.add.rectangle(centerX, centerY - textSpacer*3, 158, 40, 0x593f14).setOrigin(0.5);
+    this.add.rectangle(centerX, centerY - textSpacer*2, 580, 40, 0x593f14).setOrigin(0.5);
+    this.add.rectangle(centerX, centerY - textSpacer, 574, 40, 0x593f14).setOrigin(0.5);
 
     this.balloon1 = this.add.tileSprite(centerX + textSpacer + 10, centerY - textSpacer*4 - 5, 600, 465, 'balloon1').setScale(0.20, 0.20).setOrigin(0,0);
     this.balloon2 = this.add.tileSprite(centerX - textSpacer*3 , centerY - textSpacer*4, 600, 465, 'balloon2').setScale(0.20, 0.20).setOrigin(0,0);
